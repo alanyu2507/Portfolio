@@ -10,32 +10,24 @@ const projects = [
       'Inverse kinematics implementation for 3-DOF legs',
       'Closed-loop feedback control for uneven terrain navigation and self-balancing',
       '50ms response latency for real-time control',
+      'Modular attachment system for dynamic utility integration',
+      'Optimized multi-threading and memory allocation to avoid CPU interrupts'
     ],
-    bom: [
-      'RPI 4',
-      'RP2040 Servo Controller',
-      'MG996R Servo Motors',
-      'PS4 Controller'
-    ],
-    schematicLink: 'https://github.com/hans-vador/SpiderBot',
-    cadLink: 'https://www.youtube.com/watch?v=_bQvNhBsuP8',
-    schematicLabel: 'VIEW CODE',
-    cadLabel: 'VIEW DEMO',
+    media: {
+      type: 'video',
+      src: 'https://www.youtube.com/embed/_bQvNhBsuP8',
+    },
   },
   {
     title: 'Atombots Research',
     highlights: [
       '1kHz telemetry loop for real-time data acquisition',
-      'CAN bus bit-packing optimization for Wheeled Quarduped',
+      'CAN bus bit-packing optimization for Quarduped',
     ],
-    bom: [
-      'GIM6010-8 Motor',
-      'RPI 4',
-      'RS485 CAN HAT',
-      'NVIDIA Jetson',
-    ],
-    schematicLink: '#',
-    cadLink: '#',
+    media: {
+      type: 'image',
+      src: '/images/Atombots.jpg',
+    },
   },
   {
     title: 'SPARK Isolation PCB',
@@ -44,10 +36,10 @@ const projects = [
       '100ms safety cutoff response time',
       'Advanced isolation circuitry for high-voltage applications',
     ],
-    bom: [
-    ],
-    schematicLink: '#',
-    cadLink: '#',
+    media: {
+      type: 'image',
+      src: '/images/Isolation.png',
+    },
   },
   {
     title: 'Volleyball Serving Machine',
@@ -56,13 +48,10 @@ const projects = [
       'Custom motor hub to dampen resonant frequencies',
       'Real-time Arduino speed control',
     ],
-    bom: [
-      '20,000 RPM DC Motors',
-      'Arduino Uno',
-      '12V Adapter',
-      '30A Dual-Channel H-Bridge',
-      'T Slot Aluminum Extrusion',
-    ],
+    media: {
+      type: 'video',
+      src: 'https://www.youtube.com/embed/wHKCj8P0450',
+    },
     schematicLink: 'https://youtu.be/wHKCj8P0450',
     schematicLabel: 'VIEW DEMO',
   },
@@ -70,12 +59,12 @@ const projects = [
     title: 'Niffenegger Lab',
     highlights: [
       'Contributed to Python-to-CAD 3D laser alignment library',
-      'Developped custom rendering pipelin in Blender'
+      'Developped custom rendering pipeline in Blender'
     ],
-    bom: [
-    ],
-    schematicLink: '#',
-    cadLink: '#',
+    media: {
+      type: 'image',
+      src: '/images/mot.png',
+    },
   },
 ]
 
@@ -99,11 +88,7 @@ export default function FeaturedProjects() {
               key={project.title}
               title={project.title}
               highlights={project.highlights}
-              bom={project.bom}
-              schematicLink={project.schematicLink}
-              cadLink={project.cadLink}
-              schematicLabel={project.schematicLabel}
-              cadLabel={project.cadLabel}
+              media={project.media}
               index={index}
             />
           ))}

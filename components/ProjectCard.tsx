@@ -1,30 +1,23 @@
 'use client'
 
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 interface ProjectCardProps {
   title: string
   highlights: string[]
-  bom: string[]
-  schematicLink?: string
-  cadLink?: string
-  schematicLabel?: string
-  cadLabel?: string
+  media?: {
+    type: 'image' | 'video'
+    src: string
+  }
   index: number
 }
 
 export default function ProjectCard({
   title,
   highlights,
-  bom,
-  schematicLink,
-  cadLink,
-  schematicLabel = 'VIEW SCHEMATIC',
-  cadLabel = 'VIEW CAD',
+  media,
   index,
 }: ProjectCardProps) {
-  const [isExpanded, setIsExpanded] = useState(false)
 
   return (
     <motion.div
@@ -34,11 +27,39 @@ export default function ProjectCard({
       transition={{ delay: index * 0.1, duration: 0.5 }}
       className="border border-white/10 bg-black/30 p-6 hover:border-white/20 transition-all duration-200 overflow-hidden"
     >
-      <h3 className="font-display text-lg md:text-xl font-bold text-white mb-6 uppercase tracking-tighter">
+      <h3 className="font-display text-lg md:text-xl font-bold text-white mb-4 uppercase tracking-tighter">
         {title.toUpperCase()}
       </h3>
       
-      <div className="space-y-3 mb-6">
+      {media && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: index * 0.1 + 0.1, duration: 0.5 }}
+          className="mb-6"
+        >
+          {media.type === 'image' ? (
+            <img
+              src={media.src}
+              alt={title}
+              className="w-full h-auto rounded border border-white/10"
+            />
+          ) : (
+            <div className="w-full aspect-video rounded border border-white/10 overflow-hidden">
+              <iframe
+                src={media.src}
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title={title}
+              />
+            </div>
+          )}
+        </motion.div>
+      )}
+      
+      <div className="space-y-3">
         {highlights.map((highlight, idx) => (
           <motion.div
             key={idx}
@@ -53,74 +74,6 @@ export default function ProjectCard({
           </motion.div>
         ))}
       </div>
-      
-      <motion.button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full py-3 px-4 border border-white/20 bg-black/50 font-display text-xs uppercase tracking-tight text-white hover:border-white/30 hover:bg-black/70 transition-all duration-200 flex items-center justify-between"
-        whileHover={{ opacity: 0.9 }}
-        whileTap={{ scale: 0.98 }}
-      >
-        <span>TECHNICAL SPECS</span>
-        <motion.span
-          animate={{ rotate: isExpanded ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-          className="text-xs"
-        >
-          ▼
-        </motion.span>
-      </motion.button>
-      
-      <AnimatePresence>
-        {isExpanded && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden"
-          >
-            <div className="mt-6 pt-6 border-t border-white/10">
-              <h4 className="font-display text-xs font-bold text-white mb-4 uppercase tracking-tight">
-                BILL OF MATERIALS
-              </h4>
-              <ul className="space-y-2 mb-6">
-                {bom.map((item, idx) => (
-                  <li
-                    key={idx}
-                    className="text-secondary font-display text-[10px] uppercase tracking-tight flex items-center gap-2"
-                  >
-                    <span className="text-white">•</span>
-                    {item.toUpperCase()}
-                  </li>
-                ))}
-              </ul>
-              
-              <div className="flex flex-wrap gap-3">
-                {schematicLink && (
-                  <a
-                    href={schematicLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-3 py-2 border border-white/20 bg-black/50 font-display text-[10px] uppercase tracking-tight text-white hover:border-white/30 hover:bg-black/70 transition-all duration-200"
-                  >
-                    {schematicLabel}
-                  </a>
-                )}
-                {cadLink && (
-                  <a
-                    href={cadLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-3 py-2 border border-white/20 bg-black/50 font-display text-[10px] uppercase tracking-tight text-white hover:border-white/30 hover:bg-black/70 transition-all duration-200"
-                  >
-                    {cadLabel}
-                  </a>
-                )}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </motion.div>
   )
 }
