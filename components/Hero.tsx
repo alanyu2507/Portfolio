@@ -23,11 +23,22 @@ export default function Hero() {
     return () => clearInterval(typingInterval)
   }, [])
 
+  // Get basePath for GitHub Pages deployment
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
+  const backgroundImageSrc = basePath ? `${basePath}/images/lab1.png` : '/images/lab1.png'
+
   return (
     <section id="home" className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-      {/* Dark background with heavy overlay */}
-      <div className="absolute inset-0 bg-black/80 z-0"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black z-0"></div>
+      {/* Background Image */}
+      <img
+        src={backgroundImageSrc}
+        alt="Lab background"
+        className="absolute inset-0 w-full h-full object-cover z-0"
+      />
+      
+      {/* Dark background with lighter overlay to show image */}
+      <div className="absolute inset-0 bg-black/30 z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/60 z-0"></div>
       
       <div className="relative z-10 text-center px-8 md:px-12">
         <motion.div
