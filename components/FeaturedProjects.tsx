@@ -3,7 +3,18 @@
 import { motion } from 'framer-motion'
 import ProjectCard from './ProjectCard'
 
-const projects = [
+type ProjectMedia = {
+  type: 'image' | 'video'
+  src: string
+}
+
+type Project = {
+  title: string
+  highlights: string[]
+  media?: ProjectMedia
+}
+
+const projects: Project[] = [
   {
     title: 'Multi-Modal Hexapod',
     highlights: [
@@ -14,7 +25,7 @@ const projects = [
       'Optimized multi-threading and memory allocation to avoid CPU interrupts'
     ],
     media: {
-      type: 'video',
+      type: 'video' as const,
       src: 'https://www.youtube.com/embed/_bQvNhBsuP8',
     },
   },
@@ -25,7 +36,7 @@ const projects = [
       'CAN bus bit-packing optimization for Quarduped',
     ],
     media: {
-      type: 'image',
+      type: 'image' as const,
       src: '/images/Atombots.jpg',
     },
   },
@@ -37,7 +48,7 @@ const projects = [
       'Advanced isolation circuitry for high-voltage applications',
     ],
     media: {
-      type: 'image',
+      type: 'image' as const,
       src: '/images/Isolation.png',
     },
   },
@@ -49,11 +60,9 @@ const projects = [
       'Real-time Arduino speed control',
     ],
     media: {
-      type: 'video',
+      type: 'video' as const,
       src: 'https://www.youtube.com/embed/wHKCj8P0450',
     },
-    schematicLink: 'https://youtu.be/wHKCj8P0450',
-    schematicLabel: 'VIEW DEMO',
   },
   {
     title: 'Niffenegger Lab',
@@ -62,7 +71,7 @@ const projects = [
       'Developped custom rendering pipeline in Blender'
     ],
     media: {
-      type: 'image',
+      type: 'image' as const,
       src: '/images/mot.png',
     },
   },
