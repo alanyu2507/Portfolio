@@ -18,6 +18,18 @@ export default function ProjectCard({
   media,
   index,
 }: ProjectCardProps) {
+  // Get basePath for GitHub Pages deployment
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
+  
+  // Helper function to get the correct image path
+  const getImageSrc = (src: string) => {
+    // If it's already a full URL (http/https), return as is
+    if (src.startsWith('http://') || src.startsWith('https://')) {
+      return src
+    }
+    // Otherwise, prepend basePath for production
+    return basePath + src
+  }
 
   return (
     <motion.div
@@ -41,7 +53,7 @@ export default function ProjectCard({
         >
           {media.type === 'image' ? (
             <img
-              src={media.src}
+              src={getImageSrc(media.src)}
               alt={title}
               className="w-full h-auto rounded border border-white/10"
             />
