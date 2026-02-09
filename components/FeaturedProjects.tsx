@@ -32,8 +32,9 @@ const projects: Project[] = [
   {
     title: 'Atombots Research',
     highlights: [
-      '1kHz telemetry loop for real-time data acquisition',
-      'CAN bus bit-packing optimization for Quarduped',
+      'FreeRTOS implementation for task scheduling and prioritization',
+      'CAN bus bit-packing optimization for response time under 50ms',
+      'Hardware abstraction layer for easy integration between different hardware',
     ],
     media: {
       type: 'image' as const,
@@ -45,11 +46,23 @@ const projects: Project[] = [
     highlights: [
       '20% footprint reduction compared to previous design',
       '100ms safety cutoff response time',
-      'Advanced isolation circuitry for high-voltage applications',
+      'I2C communication with motherboard',
     ],
     media: {
       type: 'image' as const,
       src: '/images/Isolation.png',
+    },
+  },
+  {
+    title: 'Niffenegger Lab',
+    highlights: [
+      'Expanded Python-to-CAD laser alignment library from 2D to 3D',
+      'Tested setup and validated alignment accuracy with 3D printed parts',
+      'Developped custom rendering pipeline in Blender'
+    ],
+    media: {
+      type: 'image' as const,
+      src: '/images/mot.png',
     },
   },
   {
@@ -62,17 +75,6 @@ const projects: Project[] = [
     media: {
       type: 'video' as const,
       src: 'https://www.youtube.com/embed/wHKCj8P0450',
-    },
-  },
-  {
-    title: 'Niffenegger Lab',
-    highlights: [
-      'Contributed to Python-to-CAD 3D laser alignment library',
-      'Developped custom rendering pipeline in Blender'
-    ],
-    media: {
-      type: 'image' as const,
-      src: '/images/mot.png',
     },
   },
 ]
